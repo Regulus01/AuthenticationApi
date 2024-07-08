@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Application\Application.csproj" />
+      <ProjectReference Include="..\..\Infra\CrossCutting\Util\Configuration\Infra.CrossCutting.Util.Configuration.Core\Infra.CrossCutting.Util.Configuration.Core.csproj" />
+      <ProjectReference Include="..\..\Infra\CrossCutting\Util\Notifications\Infra.CrossCutting.Util.Notifications\Infra.CrossCutting.Util.Notifications.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Authorization\" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+    
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <ItemGroup>
+            <SourceConfig Include="../../Config/*.json" />
+        </ItemGroup>
+
+        <Copy SourceFiles="@(SourceConfig)" DestinationFolder="./Config" SkipUnchangedFiles="true" />
+    </Target>
+</Project>
