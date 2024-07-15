@@ -3,21 +3,26 @@
 public class Usuario
 {
     public Guid Id { get; private set; }
-    public string Nome { get; private set; }
     public string Email { get; private set; }
     public string Password { get; private set; }
+    public DateTimeOffset DataDeCadastro { get; private set; }
+    public DateTimeOffset? UltimoLogin { get; private set; }
+    public bool Status { get; private set; }
     public virtual ICollection<UsuarioRole> UsuarioRoles { get; private set; }
 
-    public Usuario(string nome, string email, string password)
+    public void InformeDataDeCadastro(DateTimeOffset data)
     {
-        Nome = nome;
-        Email = email;
-        Password = password;
+        DataDeCadastro = data;
     }
 
-    public void InformeUsuarioId(Guid id)
+    public void InformeUltimoLogin(DateTimeOffset data)
     {
-        Id = id;
+        UltimoLogin = data;
+    }
+
+    public void InformeStatus(bool status)
+    {
+        Status = status;
     }
 
     public void InformeSenha(string senha)

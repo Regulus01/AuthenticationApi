@@ -20,15 +20,15 @@ public abstract class CoreController : ControllerBase
         if (!HasNotifications())
         {
             if (result != null)
-                return Ok(new
+                return Ok(new ReponseModel
                 {
-                    success = true,
-                    data = result
+                    Success = true,
+                    Data = result
                 });
 
-            return Ok(new
+            return Ok(new ReponseModel
             {
-                success = true
+                Success = true
             });
         }
 

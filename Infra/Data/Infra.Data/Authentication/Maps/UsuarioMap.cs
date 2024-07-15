@@ -14,12 +14,19 @@ public class UsuarioMap : IEntityTypeConfiguration<Usuario>
             .HasColumnName("Usu_Id")
             .ValueGeneratedOnAdd();
 
-        builder.Property(x => x.Nome)
-            .HasColumnName("Usu_Nome")
-            .IsRequired();
-
         builder.Property(x => x.Email)
             .HasColumnName("Usu_Email")
+            .IsRequired();
+
+        builder.Property(x => x.DataDeCadastro)
+            .HasColumnName("Usu_DataDeCadastro")
+            .IsRequired();
+
+        builder.Property(x => x.UltimoLogin)
+            .HasColumnName("Usu_UltimoLogin");
+        
+        builder.Property(x => x.Status)
+            .HasColumnName("Usu_Status")
             .IsRequired();
         
         builder.Property(x => x.Password)

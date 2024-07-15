@@ -1,3 +1,4 @@
+using Application.Authorization.Dto;
 using Application.ViewModels;
 
 namespace Application.Interface;
@@ -11,6 +12,6 @@ public interface IAuthorizationAppService
     /// <remarks>
     ///  Método que cadastrar um usuário no sistema, o usuário cadastrado terá por padrão a role de comprador
     /// </remarks>
-    /// <param name="viewModel">Dados necessários para o cadastro do usuário</param>
-    void CadastrarUsuario(CadastroViewModel viewModel);
+    /// <param name="dto">Dados necessários para o cadastro do usuário</param>
+    void CadastrarUsuario(CadastrarUsuarioDto dto);
 }

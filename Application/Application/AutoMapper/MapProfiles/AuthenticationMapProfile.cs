@@ -1,4 +1,5 @@
-﻿using Application.ViewModels;
+﻿using Application.Authorization.Dto;
+using Application.ViewModels;
 using AutoMapper;
 using Domain.Authentication.Commands;
 using Domain.Authentication.Configuration;
@@ -11,7 +12,7 @@ public class AuthenticationMapProfile : Profile
     public AuthenticationMapProfile()
     {
         //ViewModel to command
-        CreateMap<CadastroViewModel, CadastrarUsuarioCommand>();
+        CreateMap<CadastrarUsuarioDto, CadastrarUsuarioCommand>();
         CreateMap<LoginViewModel, LoginCommand>();
         
         //Command to domain

@@ -1,3 +1,4 @@
+using Application.Authorization.Dto;
 using Application.Interface;
 using Application.ViewModels;
 using HttpAcessor;
@@ -34,7 +35,6 @@ public class AuthenticationController : CoreController
     ///  Token de acesso do usuário
     /// </returns>
     /// <response code="200">Retorna quando usuário é autenticado com sucesso</response>
-    /// <response code="400">Retorna quando há um erro na requisição ou nos dados fornecidos</response>
     [HttpPost]
     [Route("Login")]
     [AllowAnonymous]
@@ -49,20 +49,20 @@ public class AuthenticationController : CoreController
     /// EndPoint utilizado para cadastrar usuário no sistema
     /// </summary>
     /// <remarks>
-    /// EndPoint utilizado para cadastrar usuário no sistema, o usuário cadastrado por padrão terá a role de admin
+    /// EndPoint utilizado para cadastrar usuário no sistema, o usuário cadastrado por padrão terá a role de usuario
     /// </remarks>
-    /// <param name="viewModel">Dados necessários para o cadastro no sistema</param>
+    /// <param name="dto">Dados necessários para o cadastro no sistema</param>
     /// <returns>
     ///  Indicativo se a operação foi bem sucedida
     /// </returns>
-    /// <response code="200">Retorna quando o usuário é cadastrado com sucesso</response>
-    /// <response code="400">Retorna quando há um erro na requisição ou nos dados fornecidos</response>
+    [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status400BadRequest)]
     [HttpPost]
     [Route("Cadastrar")]
     [AllowAnonymous]
-    public IActionResult CadastrarUsuario(CadastroViewModel viewModel)
+    public IActionResult CadastrarUsuario(CadastrarUsuarioDto dto)
     {
-        _appService.CadastrarUsuario(viewModel);
+        _appService.CadastrarUsuario(dto);
         
         return ApiResponse();
     }

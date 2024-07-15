@@ -2,7 +2,6 @@
 using Domain.Authentication.Commands;
 using Domain.Authentication.Configuration;
 using Domain.Authentication.Entities;
-using Domain.Authentication.Entities.Roles;
 using Domain.Authentication.Interface;
 using Infra.CrossCutting.Util.Notifications.Implementation;
 using Infra.CrossCutting.Util.Notifications.Interface;
@@ -12,41 +11,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Authentication.Handle;
 
-public class AuthenticationCommandHandler : IRequestHandler<CadastrarUsuarioCommand>, 
-                                            IRequestHandler<LoginCommand, TokenModel>
+public partial class AuthenticationCommandHandler : IRequestHandler<CadastrarUsuarioCommand>, 
+                                                    IRequestHandler<LoginCommand, TokenModel>
 {
-    private readonly IMediator _mediator;
     private readonly IUsuarioRepository _usuarioRepository;
     private readonly IMapper _mapper;
     private readonly Notify _notify;
 
-    public AuthenticationCommandHandler(IMediator mediator, IMapper mapper, IUsuarioRepository usuarioRepository,
+    public AuthenticationCommandHandler(IMapper mapper, IUsuarioRepository usuarioRepository,
                                         INotify notify)
-    {
-        _mediator = mediator;
+    { 
         _mapper = mapper;
         _usuarioRepository = usuarioRepository;
         _notify = notify.Invoke();
-    }
-
-    public Task Handle(CadastrarUsuarioCommand request, CancellationToken cancellationToken)
-    {
-        var usuario = _mapper.Map<Usuario>(request);
-        
-        usuario.InformeUsuarioId(Guid.NewGuid());
-        usuario.InformeSenha(HashSenha(usuario, request.Password));
-        
-        _usuarioRepository.AdicionarUsuario(usuario);
-        
-        AtribuirRoleAoUsuario(usuario.Id);
-        
-        if (!_usuarioRepository.Commit())
-        {
-            _notify.NewNotification("Erro", "Erro ao inserir dados");
-            return Task.FromResult(cancellationToken);
-        }
-
-        return Task.CompletedTask;
     }
     
     public Task<TokenModel> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -79,17 +56,5 @@ public class AuthenticationCommandHandler : IRequestHandler<CadastrarUsuarioComm
         }
 
         return Task.FromResult(token);
-    }
-
-    private string HashSenha(Usuario usuario, string senha)
-    {
-        var passwordHasher = new PasswordHasher<Usuario>();
-        return passwordHasher.HashPassword(usuario, senha);
-    }
-    
-    private void AtribuirRoleAoUsuario(Guid usuarioId)
-    {
-        var usuarioRole = new UsuarioRole(usuarioId, Guid.Parse(RoleRegister.Usuario.Id));;
-        _usuarioRepository.AdicionarRole(usuarioRole);
     }
 }
