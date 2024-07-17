@@ -10,6 +10,13 @@ public class Usuario
     public bool Status { get; private set; }
     public virtual ICollection<UsuarioRole> UsuarioRoles { get; private set; }
 
+    public Usuario(Guid id, string email, string password)
+    {
+        Id = id;
+        Email = email;
+        Password = password;
+    }
+    
     public void InformeDataDeCadastro(DateTimeOffset data)
     {
         DataDeCadastro = data;

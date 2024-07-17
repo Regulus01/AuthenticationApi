@@ -19,7 +19,8 @@ public class UsuarioRepository : IUsuarioRepository
         _logger = logger;
     }
 
-    public Usuario? ObterUsuario(Expression<Func<Usuario, bool>> predicate, Func<IQueryable<Usuario>, IIncludableQueryable<Usuario, object>>? includes = null)
+    public Usuario? ObterUsuario(Expression<Func<Usuario, bool>> predicate, Func<IQueryable<Usuario>, 
+        IIncludableQueryable<Usuario, object>>? includes = null)
     {
         var query = _context.Users.AsQueryable();
 
