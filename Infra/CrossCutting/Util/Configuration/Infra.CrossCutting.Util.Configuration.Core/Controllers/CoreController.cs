@@ -1,21 +1,20 @@
 using System.Net;
 using Infra.CrossCutting.Util.Configuration.Core.Response;
-using Infra.CrossCutting.Util.Notifications.Handler;
-using MediatR;
+using Infra.CrossCutting.Util.Notifications.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Infra.CrossCutting.Util.Configuration.Core.Controllers;
 
 public abstract class CoreController : ControllerBase
 {
-    private readonly NotifyHandler _notifications;
+    private readonly INotify _notifications;
 
-    protected CoreController(INotificationHandler<Notifications.Model.Notifications> notification)
+    protected CoreController(INotify notification)
     {
-        _notifications = (NotifyHandler) notification;
+        _notifications = notification;
     }
 
-    protected IActionResult ApiResponse(object? result = null)
+    protected new IActionResult Response(object? result = null)
     {
         if (!HasNotifications())
         {

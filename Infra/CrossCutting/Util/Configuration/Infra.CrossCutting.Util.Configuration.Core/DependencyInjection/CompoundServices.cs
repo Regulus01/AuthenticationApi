@@ -1,16 +1,14 @@
 ﻿using System.Data.Common;
 using System.Reflection;
 using Application.Authorization.AppService;
+using Application.Authorization.Interface;
 using Application.AutoMapper;
-using Application.Interface;
 using Domain.Authentication.Commands;
 using Domain.Authentication.Interface;
-using Infra.CrossCutting.Util.Notifications.Handler;
 using Infra.CrossCutting.Util.Notifications.Implementation;
 using Infra.CrossCutting.Util.Notifications.Interface;
 using Infra.Data.Authentication.Context;
 using Infra.Data.Authentication.Repository;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -102,7 +100,6 @@ public class CompoundServices
 
     private static void NotificationIoCRegister(IServiceCollection serviceProvider)
     {
-        serviceProvider.AddScoped<INotificationHandler<Notifications.Model.Notifications>, NotifyHandler>();
         serviceProvider.AddScoped<INotify, Notify>();
     }
 

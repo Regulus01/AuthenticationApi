@@ -16,14 +16,14 @@ public partial class AuthenticationCommandHandler : IRequestHandler<CadastrarUsu
 {
     private readonly IUsuarioRepository _usuarioRepository;
     private readonly IMapper _mapper;
-    private readonly Notify _notify;
+    private readonly INotify _notify;
 
     public AuthenticationCommandHandler(IMapper mapper, IUsuarioRepository usuarioRepository,
                                         INotify notify)
     { 
         _mapper = mapper;
         _usuarioRepository = usuarioRepository;
-        _notify = notify.Invoke();
+        _notify = notify;
     }
     
     public Task<TokenModel> Handle(LoginCommand request, CancellationToken cancellationToken)

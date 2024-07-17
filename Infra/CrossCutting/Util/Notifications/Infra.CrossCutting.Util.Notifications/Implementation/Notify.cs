@@ -1,31 +1,29 @@
-using Infra.CrossCutting.Util.Notifications.Handler;
 using Infra.CrossCutting.Util.Notifications.Interface;
-using MediatR;
 using NotificationsModel = Infra.CrossCutting.Util.Notifications.Model.Notifications;
 
 namespace Infra.CrossCutting.Util.Notifications.Implementation;
 
 public class Notify : INotify
 {
-    private readonly NotifyHandler _messageHandler;
+    private List<NotificationsModel> _notifications;
 
-    public Notify(INotificationHandler<NotificationsModel> notification)
+    public Notify(List<NotificationsModel> notifications)
     {
-        _messageHandler = (NotifyHandler) notification;
+        _notifications = new List<NotificationsModel>();
     }
 
-    public Notify Invoke()
+    public IEnumerable<NotificationsModel> GetNotifications()
     {
-        return this;
+        return _notifications.Where(not => not.GetType() == typeof(NotificationsModel)).ToList();
     }
 
     public bool HasNotifications()
     {
-        return !_messageHandler.HasNotifications();
+        return GetNotifications().Any();
     }
 
     public void NewNotification(string key, string message)
     {
-        _messageHandler.Handle(new NotificationsModel(key, message), default(CancellationToken));
+        _notifications.Add(new NotificationsModel(key, message));
     }
 }

@@ -1,8 +1,9 @@
 using Application.Authorization.Dto;
-using Application.Interface;
+using Application.Authorization.Interface;
 using Application.ViewModels;
 using HttpAcessor;
 using Infra.CrossCutting.Util.Configuration.Core.Controllers;
+using Infra.CrossCutting.Util.Notifications.Interface;
 using Infra.CrossCutting.Util.Notifications.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -15,13 +16,10 @@ namespace Service.Authorization.Controllers;
 public class AuthenticationController : CoreController
 {
     private IAuthorizationAppService _appService;
-    private readonly IAuthenticatedUser _user;
 
-    public AuthenticationController(INotificationHandler<Notifications> notification,
-                                    IAuthorizationAppService appService, IAuthenticatedUser user) : base(notification)
+    public AuthenticationController(INotify notification, IAuthorizationAppService appService) : base(notification)
     {
         _appService = appService;
-        _user = user;
     }
 
     /// <summary>
@@ -41,10 +39,10 @@ public class AuthenticationController : CoreController
     public IActionResult ObterTokenDeAutenticacao(LoginViewModel? login)
     {
         var response = _appService.Login(login);
-        
-        return ApiResponse(response);
+
+        return Response(response);
     }
-    
+
     /// <summary>
     /// EndPoint utilizado para cadastrar usuário no sistema
     /// </summary>
@@ -63,7 +61,7 @@ public class AuthenticationController : CoreController
     public IActionResult CadastrarUsuario(CadastrarUsuarioDto dto)
     {
         _appService.CadastrarUsuario(dto);
-        
-        return ApiResponse();
+
+        return Response();
     }
 }

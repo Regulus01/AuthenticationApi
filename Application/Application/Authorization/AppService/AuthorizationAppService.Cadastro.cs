@@ -18,7 +18,7 @@ public partial class AuthorizationAppService
         if (_notify.HasNotifications())
             return;
 
-        var usuario = _usuarioRepository.ObterUsuario(x => x.Email.Equals(dto.Email));
+        var usuario = _repository.ObterUsuario(x => x.Email.Equals(dto.Email));
         
         if (usuario != null)
         {
@@ -36,7 +36,7 @@ public partial class AuthorizationAppService
         var validator = new CadastrarUsuarioDtoValidator();
 
         var result = validator.Validate(dto);
-
+        
         if (!result.IsValid)
             foreach (var erros in result.Errors)
                 _notify.NewNotification("Erro", erros.ErrorMessage);

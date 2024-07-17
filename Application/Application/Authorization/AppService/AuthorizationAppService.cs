@@ -1,10 +1,9 @@
 using System.Text.RegularExpressions;
-using Application.Interface;
+using Application.Authorization.Interface;
 using Application.ViewModels;
 using AutoMapper;
 using Domain.Authentication.Commands;
 using Domain.Authentication.Interface;
-using Infra.CrossCutting.Util.Notifications.Implementation;
 using Infra.CrossCutting.Util.Notifications.Interface;
 using MediatR;
 
@@ -12,17 +11,17 @@ namespace Application.Authorization.AppService;
 
 public partial class AuthorizationAppService : IAuthorizationAppService
 {
-    private readonly Notify _notify;
+    private readonly INotify _notify;
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUsuarioRepository _repository;
 
-    public AuthorizationAppService(INotify notify, IMediator mediator, IMapper mapper, IUsuarioRepository usuarioRepository)
+    public AuthorizationAppService(INotify notify, IMediator mediator, IMapper mapper, IUsuarioRepository repository)
     {
         _mediator = mediator;
         _mapper = mapper;
-        _usuarioRepository = usuarioRepository;
-        _notify = notify.Invoke();
+        _repository = repository;
+        _notify = notify;
     }
     
     public TokenViewModel Login(LoginViewModel? message)

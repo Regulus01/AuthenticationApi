@@ -1,11 +1,12 @@
 using Application.Authorization.Dto;
 using Application.ViewModels;
 
-namespace Application.Interface;
+namespace Application.Authorization.Interface;
 
 public interface IAuthorizationAppService
 {
     TokenViewModel Login(LoginViewModel? message);
+    
     /// <summary>
     /// Método utilizado para cadastrar um usuário no sistema
     /// </summary>
