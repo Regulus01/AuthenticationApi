@@ -3,6 +3,7 @@ using Application.Authorization.AppService;
 using Application.AutoMapper;
 using Domain.Authentication.Entities;
 using Domain.Authentication.Interface;
+using Infra.CrossCutting.Util.Notifications.Interface;
 using Microsoft.EntityFrameworkCore.Query;
 using Moq;
 using Moq.AutoMock;
@@ -33,4 +34,10 @@ public class Fixture
                 ((predicate, _) => usuarios.FirstOrDefault(predicate.Compile()));
     }
 
+    public void SetupHasNotifications(bool hasNotifications = true)
+    {
+        Mocker.GetMock<INotify>()
+            .Setup(x => x.HasNotifications())
+            .Returns(hasNotifications);
+    }
 }

@@ -92,4 +92,52 @@ public class Test : IClassFixture<Fixture>
                     It.IsAny<CadastrarUsuarioCommand>(), It.IsAny<CancellationToken>()),
                 Times.Never);
     }
+    
+    [Fact(DisplayName = "Cadastra o usuário - Dados invalidos - Falha")]
+    public void CadastrarUsuario_DadosInvalidos_Falha()
+    {
+        //Arrange
+        var cadastroDto = Factory.CadastrarUsuarioDto(email : "aline@gmail", password: "");
+        
+        //Setup
+        _fixture.SetupHasNotifications();
+        
+        //Act
+        _appService.CadastrarUsuario(cadastroDto);
+
+        //Assert
+        _fixture.Mocker.GetMock<INotify>()
+            .Verify(x => x.HasNotifications(),
+                Times.Once());
+        
+        _fixture.Mocker.GetMock<INotify>()
+            .Verify(x => x.NewNotification(
+                    It.IsAny<string>(), 
+                    It.IsAny<string>()),
+                Times.Exactly(2));
+
+        
+        _fixture.Mocker.GetMock<INotify>()
+            .Verify(x => x.NewNotification(
+                    It.Is<string>(e => e.Equals("Erro")), 
+                    It.Is<string>(e => e.Equals(ResourceErrorMessage.FORMATO_EMAIL_INVALIDO))),
+                Times.Once);
+        
+        _fixture.Mocker.GetMock<INotify>()
+            .Verify(x => x.NewNotification(
+                    It.Is<string>(e => e.Equals("Erro")), 
+                    It.Is<string>(e => e.Equals(ResourceErrorMessage.SENHA_VAZIA))),
+                Times.Once);
+        
+        _fixture.Mocker.GetMock<IUsuarioRepository>()
+            .Verify(x => x.ObterUsuario(
+                    It.IsAny<Expression<Func<Usuario, bool>>>(),
+                    It.IsAny<Func<IQueryable<Usuario>, IIncludableQueryable<Usuario, object>>?>()),
+                Times.Never);
+
+        _fixture.Mocker.GetMock<IMediator>()
+            .Verify(x => x.Send(
+                    It.IsAny<CadastrarUsuarioCommand>(), It.IsAny<CancellationToken>()),
+                Times.Never);
+    }
 }
