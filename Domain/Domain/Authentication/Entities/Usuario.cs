@@ -10,6 +10,11 @@ public class Usuario
     public bool Status { get; private set; }
     public virtual ICollection<UsuarioRole> UsuarioRoles { get; private set; }
 
+    public Usuario()
+    {
+        UsuarioRoles = new List<UsuarioRole>();
+    }
+    
     public Usuario(Guid id, string email, string password)
     {
         Id = id;

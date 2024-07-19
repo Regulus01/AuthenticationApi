@@ -47,6 +47,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8BB47239-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Application.Test", "Test\Authentication.Application.Test\Authentication.Application.Test.csproj", "{2C0CE79A-3706-44FB-BCE1-3E4C54FC4B06}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{76D5AF02-86DE-4FD1-A3B4-E71EE9BD0B49}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\docker-compose.yml = Docker\docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

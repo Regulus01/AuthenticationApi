@@ -54,7 +54,7 @@ public partial class AuthenticationCommandHandler
     /// <param name="usuario">usuario a ter a role atribuida</param>
     private void AtribuirRolePadraoAoUsuario(ref Usuario usuario)
     {
-        var usuarioRole = new UsuarioRole(usuario.Id, Guid.Parse(RoleRegister.Usuario.Id));;
+        var usuarioRole = new UsuarioRole(usuario.Id, Guid.Parse(RoleRegister.Usuario.Id));
         usuario.UsuarioRoles.Add(usuarioRole);
     }
 }

@@ -10,7 +10,7 @@ public static class RoleRegister
     
     public struct Usuario
     {
-        public const string Id = "6818f3b8-b19f-42cd-a236-61cb31305217";
+        public const string Id = "4cf226b0-d84d-4394-82fc-80eab1b7aa5e";
         public const string Nome = "USUARIO";
     }
 }
