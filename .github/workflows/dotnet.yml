@@ -11,14 +11,18 @@ on:
 
 jobs:
   build:
-
+    strategy:
+      matrix:
+        configuration: [ Debug, Release ]
+    
     runs-on: windows-latest
 
-    env:
-      Solution_Name: AuthenticationApi
-      Test_Project_Path: Test\Authentication.Application.Test\Authentication.Application.Test.csproj 
-      
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
