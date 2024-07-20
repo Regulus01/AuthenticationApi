@@ -14,14 +14,15 @@ jobs:
 
     runs-on: windows-latest
 
+    env:
+      Solution_Name: AuthenticationApi
+      Test_Project_Path: Test\Authentication.Application.Test\Authentication.Application.Test.csproj 
+      
     steps:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v2
         
       - name: Restore dependencies
         run: dotnet restore
