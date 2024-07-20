@@ -14,8 +14,8 @@ namespace AuthenticationTests;
 
 public class Test : IClassFixture<Fixture>
 {
-    private Fixture _fixture;
-    private IAuthorizationAppService _appService;
+    private readonly Fixture _fixture;
+    private readonly IAuthorizationAppService _appService;
 
     public Test(Fixture fixture)
     {

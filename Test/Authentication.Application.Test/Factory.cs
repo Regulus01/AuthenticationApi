@@ -3,7 +3,7 @@ using Domain.Authentication.Entities;
 
 namespace AuthenticationTests;
 
-public class Factory
+internal static class Factory
 {
     public static CadastrarUsuarioDto CadastrarUsuarioDto(string email = "jose@gmail.com", string password = "123qwe")
     {
