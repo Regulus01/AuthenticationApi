@@ -97,7 +97,7 @@ public class Test : IClassFixture<Fixture>
     public void CadastrarUsuario_DadosInvalidos_Falha()
     {
         //Arrange
-        var cadastroDto = Factory.CadastrarUsuarioDto(email : "aline@gmail", password: "");
+        var cadastroDto = Factory.CadastrarUsuarioDto(email : "aline@", password: "");
         
         //Setup
         _fixture.SetupHasNotifications();
