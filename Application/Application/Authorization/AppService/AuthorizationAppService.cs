@@ -1,9 +1,7 @@
-using System.Text.RegularExpressions;
 using Application.Authorization.Interface;
-using Application.ViewModels;
 using AutoMapper;
-using Domain.Authentication.Commands;
 using Domain.Authentication.Interface;
+using FluentValidation.Results;
 using Infra.CrossCutting.Util.Notifications.Interface;
 using MediatR;
 
@@ -24,29 +22,10 @@ public partial class AuthorizationAppService : IAuthorizationAppService
         _notify = notify;
     }
     
-    public TokenViewModel Login(LoginViewModel? message)
+    private void GerarNotificationValidationResult(ValidationResult result)
     {
-        if (string.IsNullOrEmpty(message?.Email) || string.IsNullOrEmpty(message.Password))
-        {
-            _notify.NewNotification("Erro", "É necessário informar o email e senha");
-            return new TokenViewModel();
-        }
-        
-        if (!ValidarFormatoDoEmail(message.Email))
-        {
-            _notify.NewNotification("Erro", "Email invalido");
-            return new TokenViewModel();
-        }
-        
-        var loginCommand = _mapper.Map<LoginCommand>(message);
-
-        var token = _mediator.Send(loginCommand).Result;
-
-        return _mapper.Map<TokenViewModel>(token);
-    }
-    
-    private bool ValidarFormatoDoEmail(string email)
-    {
-        return Regex.IsMatch(email, "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\\\.[a-zA-Z0-9-.]+$");
+        if (!result.IsValid)
+            foreach (var erros in result.Errors)
+                _notify.NewNotification("Erro", erros.ErrorMessage);
     }
 }

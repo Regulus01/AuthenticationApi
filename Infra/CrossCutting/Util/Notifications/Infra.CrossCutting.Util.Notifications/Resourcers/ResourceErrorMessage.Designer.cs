@@ -61,7 +61,7 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Email is already registered.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O email já está cadastrado.
         /// </summary>
         public static string EMAIL_CADASTRADO {
             get {
@@ -70,7 +70,7 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The email cannot be empty.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo de email não pode ser vazio.
         /// </summary>
         public static string EMAIL_VAZIO {
             get {
@@ -79,7 +79,25 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The email format is invalid.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Falha na autenticação.
+        /// </summary>
+        public static string FALHA_AO_GERAR_TOKEN {
+            get {
+                return ResourceManager.GetString("FALHA_AO_GERAR_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao inserir no banco de dados.
+        /// </summary>
+        public static string FALHA_NO_COMMIT {
+            get {
+                return ResourceManager.GetString("FALHA_NO_COMMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O formato do email é invalido.
         /// </summary>
         public static string FORMATO_EMAIL_INVALIDO {
             get {
@@ -88,7 +106,7 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The name cannot be empty.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo de nome não pode ser vazio.
         /// </summary>
         public static string NOME_VAZIO {
             get {
@@ -97,11 +115,29 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The password cannot be empty.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A senha informada é invalida.
+        /// </summary>
+        public static string SENHA_INVALIDA {
+            get {
+                return ResourceManager.GetString("SENHA_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo de senha não pode ser vazio.
         /// </summary>
         public static string SENHA_VAZIA {
             get {
                 return ResourceManager.GetString("SENHA_VAZIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O usuário não foi encontrado na base de dados.
+        /// </summary>
+        public static string USUARIO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", resourceCulture);
             }
         }
     }

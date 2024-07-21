@@ -1,17 +1,6 @@
-using System.ComponentModel.DataAnnotations;
+namespace Application.Authorization.Dto;
 
-namespace Application.Authorization.ViewModels;
-
-public class LoginDto
+public class LoginDto : BaseLoginCadastroDto
 {
-    /// <summary>
-    /// Email do usuário
-    /// </summary>
-    [Required]
-    public string? Email { get; set; }
-    /// <summary>
-    /// Senha do usuário
-    /// </summary>
-    [Required]
-    public string? Password { get; set; }
+
 }

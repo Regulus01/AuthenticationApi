@@ -1,6 +1,5 @@
-﻿using System.Security.Claims;
-using Domain.Authentication.Entities;
-using Newtonsoft.Json;
+﻿using Domain.Authentication.Entities;
+using System.Security.Claims;
 
 namespace Domain.Authentication.Extension;
 
@@ -12,7 +11,7 @@ public static class RoleClaimExtension
     /// <remarks>
     ///  Método responsável por criar uma lista de claims, baseado nas propriedades
     ///  especificadas do usuário. Essas claims principais serão utilizadas pelo token de
-    ///  authorização
+    ///  autorização
     /// </remarks>
     /// <param name="user">Classe que o método de extensão será iniciada</param>
     /// <returns>Lista com as claims que vão compor o token</returns>

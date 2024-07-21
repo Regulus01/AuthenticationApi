@@ -1,6 +1,7 @@
 using Domain.Authentication.Commands;
 using Domain.Authentication.Entities;
 using Domain.Authentication.Entities.Roles;
+using Infra.CrossCutting.Util.Notifications.Resourcers;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Authentication.Handle;
@@ -19,7 +20,7 @@ public partial class AuthenticationCommandHandler
         
         if (!_usuarioRepository.Commit())
         {
-            _notify.NewNotification("Erro", "Erro ao inserir dados");
+            _notify.NewNotification("Erro", ResourceErrorMessage.FALHA_NO_COMMIT);
             return Task.FromResult(cancellationToken);
         }
 

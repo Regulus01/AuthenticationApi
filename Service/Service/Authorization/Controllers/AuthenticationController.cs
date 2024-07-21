@@ -1,11 +1,7 @@
 using Application.Authorization.Dto;
 using Application.Authorization.Interface;
-using Application.ViewModels;
-using HttpAcessor;
 using Infra.CrossCutting.Util.Configuration.Core.Controllers;
 using Infra.CrossCutting.Util.Notifications.Interface;
-using Infra.CrossCutting.Util.Notifications.Model;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +11,7 @@ namespace Service.Authorization.Controllers;
 [Route("api/Authentication/")]
 public class AuthenticationController : CoreController
 {
-    private IAuthorizationAppService _appService;
+    private readonly IAuthorizationAppService _appService;
 
     public AuthenticationController(INotify notification, IAuthorizationAppService appService) : base(notification)
     {
@@ -23,20 +19,20 @@ public class AuthenticationController : CoreController
     }
 
     /// <summary>
-    /// EndPoint utilizado para logar no sistema
+    /// Autentica o usuário no sistema
     /// </summary>
-    /// <remarks>
-    /// Utilizado para realizar o login no sistema
-    /// </remarks>
     /// <param name="login">Dados necessários para o login no sistema</param>
     /// <returns>
     ///  Token de acesso do usuário
     /// </returns>
-    /// <response code="200">Retorna quando usuário é autenticado com sucesso</response>
+    /// <response code="200">Usuário autenticado</response>
+    /// <response code="400">Erro na requisição</response>
+    [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status400BadRequest)]
     [HttpPost]
     [Route("Login")]
     [AllowAnonymous]
-    public IActionResult ObterTokenDeAutenticacao(LoginViewModel? login)
+    public IActionResult ObterTokenDeAutenticacao(LoginDto? login)
     {
         var response = _appService.Login(login);
 
@@ -44,15 +40,14 @@ public class AuthenticationController : CoreController
     }
 
     /// <summary>
-    /// EndPoint utilizado para cadastrar usuário no sistema
+    /// Cadastra um usuário no sistema
     /// </summary>
-    /// <remarks>
-    /// EndPoint utilizado para cadastrar usuário no sistema, o usuário cadastrado por padrão terá a role de usuario
-    /// </remarks>
     /// <param name="dto">Dados necessários para o cadastro no sistema</param>
     /// <returns>
     ///  Indicativo se a operação foi bem sucedida
     /// </returns>
+    /// <response code="200">Usuário cadastrado</response>
+    /// <response code="400">Erro na requisição</response>
     [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status400BadRequest)]
     [HttpPost]

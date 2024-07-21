@@ -13,7 +13,7 @@ public class AuthenticationMapProfile : Profile
     {
         //ViewModel to command
         CreateMap<CadastrarUsuarioDto, CadastrarUsuarioCommand>();
-        CreateMap<LoginViewModel, LoginCommand>();
+        CreateMap<LoginDto, LoginCommand>();
         
         //Command to domain
         CreateMap<CadastrarUsuarioCommand, Usuario>();

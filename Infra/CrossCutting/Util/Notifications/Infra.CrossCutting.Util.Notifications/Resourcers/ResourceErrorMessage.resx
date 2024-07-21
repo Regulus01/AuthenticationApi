@@ -118,18 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EMAIL_CADASTRADO" xml:space="preserve">
-    <value>Email is already registered</value>
+    <value>O email já está cadastrado</value>
   </data>
   <data name="NOME_VAZIO" xml:space="preserve">
-    <value>The name cannot be empty</value>
+    <value>O campo de nome não pode ser vazio</value>
   </data>
   <data name="EMAIL_VAZIO" xml:space="preserve">
-    <value>The email cannot be empty</value>
+    <value>O campo de email não pode ser vazio</value>
   </data>
   <data name="SENHA_VAZIA" xml:space="preserve">
-    <value>The password cannot be empty</value>
+    <value>O campo de senha não pode ser vazio</value>
   </data>
   <data name="FORMATO_EMAIL_INVALIDO" xml:space="preserve">
-    <value>The email format is invalid</value>
+    <value>O formato do email é invalido</value>
+  </data>
+  <data name="FALHA_AO_GERAR_TOKEN" xml:space="preserve">
+    <value>Falha na autenticação</value>
+  </data>
+  <data name="FALHA_NO_COMMIT" xml:space="preserve">
+    <value>Erro ao inserir no banco de dados</value>
+  </data>
+  <data name="SENHA_INVALIDA" xml:space="preserve">
+    <value>A senha informada é invalida</value>
+  </data>
+  <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>O usuário não foi encontrado na base de dados</value>
   </data>
 </root>

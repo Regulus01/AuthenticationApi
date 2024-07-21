@@ -5,13 +5,19 @@ namespace Application.Authorization.Interface;
 
 public interface IAuthorizationAppService
 {
-    TokenViewModel Login(LoginViewModel? message);
+    /// <summary>
+    /// Obtem o token de autenticação do usuário
+    /// </summary>
+    /// <param name="dto">Dados necessários para o login</param>
+    /// <returns>Token de autenticação do usuário</returns>
+    TokenViewModel Login(LoginDto dto);
     
     /// <summary>
-    /// Método utilizado para cadastrar um usuário no sistema
+    /// Cadastra um usuário no sistema
     /// </summary>
     /// <remarks>
-    ///  Método que cadastrar um usuário no sistema, o usuário cadastrado terá por padrão a role de comprador
+    /// Este método cria um novo registro de usuário no sistema. 
+    /// O usuário cadastrado receberá por padrão a role de "usuário".
     /// </remarks>
     /// <param name="dto">Dados necessários para o cadastro do usuário</param>
     void CadastrarUsuario(CadastrarUsuarioDto dto);
