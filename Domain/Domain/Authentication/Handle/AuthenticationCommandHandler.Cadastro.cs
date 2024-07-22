@@ -16,7 +16,7 @@ public partial class AuthenticationCommandHandler
 
         AtribuirRolePadraoAoUsuario(ref usuario);
         
-        _usuarioRepository.AdicionarUsuario(usuario);
+        _usuarioRepository.Add(usuario);
         
         if (!_usuarioRepository.Commit())
         {

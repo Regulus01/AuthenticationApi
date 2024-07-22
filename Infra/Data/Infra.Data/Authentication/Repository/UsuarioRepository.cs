@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using Domain.Authentication.Entities;
 using Domain.Authentication.Interface;
+using Infra.CrossCutting.Util.Notifications.Resourcers;
 using Infra.Data.Authentication.Context;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 
@@ -30,14 +30,19 @@ public class UsuarioRepository : IUsuarioRepository
         return query.FirstOrDefault(predicate);
     }
     
-    public void AdicionarUsuario(Usuario usuario)
+    public void Add(Usuario usuario)
     {
         _context.Add(usuario);
     }
     
-    public void AdicionarRole(UsuarioRole usuarioRole)
+    public void AddRole(UsuarioRole usuarioRole)
     {
         _context.UsuarioRoles.Add(usuarioRole);
+    }
+
+    public void Update(Usuario usuario)
+    {
+        _context.Update(usuario);
     }
     
     public bool Commit()
@@ -45,11 +50,12 @@ public class UsuarioRepository : IUsuarioRepository
         try
         {
             var result = _context.SaveChanges();
-            return result > 1;
+            return result >= 1;
         }
-        catch (Exception e)
+        
+        catch (IOException exception)
         {
-            _logger.LogInformation("Erro ao commitar entidades no banco de dados: {error}", e.Message);
+            _logger.LogError("{Message}: {Exception}", ResourceErrorMessage.FALHA_NO_COMMIT, exception);
             return false;
         }
     }

@@ -40,4 +40,27 @@ public partial class AuthenticationCommandHandler
 
         return Task.FromResult(token);
     }
+    
+    public Task Handle(InserirUltimoLoginCommand request, CancellationToken cancellationToken)
+    {
+        var usuario = _usuarioRepository.ObterUsuario(x => x.Id.Equals(request.UsuarioId));
+        
+        if (usuario == null)
+        {
+            _notify.NewNotification("Erro", ResourceErrorMessage.USUARIO_NAO_ENCONTRADO);
+            return Task.FromResult(new TokenModel());
+        }
+        
+        usuario.InformeUltimoLogin(request.DataDoUltimoLogin);
+        
+        _usuarioRepository.Update(usuario);
+
+        if (!_usuarioRepository.Commit())
+        {
+            _notify.NewNotification("Erro", ResourceErrorMessage.FALHA_NO_COMMIT);
+            return Task.FromResult(cancellationToken);
+        }
+
+        return Task.CompletedTask;
+    }
 }

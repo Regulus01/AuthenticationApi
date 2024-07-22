@@ -8,8 +8,9 @@ public interface IUsuarioRepository
 {
     public Usuario? ObterUsuario(Expression<Func<Usuario, bool>> predicate, Func<IQueryable<Usuario>, 
                                  IIncludableQueryable<Usuario, object>>? includes = null);
-    public void AdicionarUsuario(Usuario usuario);
-    public void AdicionarRole(UsuarioRole usuarioRole);
+    public void Add(Usuario usuario);
+    public void AddRole(UsuarioRole usuarioRole);
+    public void Update(Usuario usuarioRole);
 
     bool Commit();
 }

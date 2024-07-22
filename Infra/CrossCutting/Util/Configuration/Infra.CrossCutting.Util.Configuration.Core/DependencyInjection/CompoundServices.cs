@@ -128,6 +128,7 @@ public class CompoundServices
         {
             config.RegisterServicesFromAssemblies(typeof(CadastrarUsuarioCommand).Assembly);
             config.RegisterServicesFromAssemblies(typeof(LoginCommand).Assembly);
+            config.RegisterServicesFromAssemblies(typeof(InserirUltimoLoginCommand).Assembly);
         });
     }
 }

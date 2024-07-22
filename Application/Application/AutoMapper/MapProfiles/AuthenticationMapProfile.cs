@@ -11,13 +11,20 @@ public class AuthenticationMapProfile : Profile
 {
     public AuthenticationMapProfile()
     {
-        //ViewModel to command
+        //Dto to command
         CreateMap<CadastrarUsuarioDto, CadastrarUsuarioCommand>();
         CreateMap<LoginDto, LoginCommand>();
-        
+        CreateMap<InserirUltimoLoginDto, InserirUltimoLoginCommand>()
+            .AfterMap((_, cmd, ctx) =>
+                {
+                    ctx.Items.TryGetValue("UsuarioId", out var usuarioId);
+                    cmd.UsuarioId = (Guid)(usuarioId ?? Guid.Empty);
+                }
+            );
+
         //Command to domain
         CreateMap<CadastrarUsuarioCommand, Usuario>();
-        
+
         //Domain to viewModel
         CreateMap<TokenModel, TokenViewModel>();
     }

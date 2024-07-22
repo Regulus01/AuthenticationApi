@@ -27,4 +27,12 @@ internal static class Factory
     {
         return new Usuario(id ?? Guid.NewGuid(), email, senha);
     }
+
+    public static InserirUltimoLoginDto UltimoLoginDto(DateTimeOffset? data = null)
+    {
+        return new InserirUltimoLoginDto
+        {
+            DataDoUltimoLogin = data ?? DateTimeOffset.Now
+        };
+    }
 }

@@ -8,7 +8,8 @@ using MediatR;
 namespace Domain.Authentication.Handle;
 
 public partial class AuthenticationCommandHandler : IRequestHandler<CadastrarUsuarioCommand>, 
-                                                    IRequestHandler<LoginCommand, TokenModel>
+                                                    IRequestHandler<LoginCommand, TokenModel>,
+                                                    IRequestHandler<InserirUltimoLoginCommand>
 {
     private readonly IUsuarioRepository _usuarioRepository;
     private readonly IMapper _mapper;

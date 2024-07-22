@@ -45,8 +45,8 @@ public class Test : IClassFixture<Fixture>
 
         _fixture.Mocker.GetMock<IMediator>()
             .Verify(x => x.Send(
-                    It.Is<CadastrarUsuarioCommand>(cmd => cmd.Email.Equals(cadastroDto.Email) && 
-                                                          cmd.Password.Equals(cadastroDto.Password)), 
+                    It.Is<CadastrarUsuarioCommand>(cmd => cmd.Email.Equals(cadastroDto.Email) &&
+                                                          cmd.Password.Equals(cadastroDto.Password)),
                     It.IsAny<CancellationToken>()),
                 Times.Once);
     }
@@ -121,7 +121,7 @@ public class Test : IClassFixture<Fixture>
                     It.IsAny<string>(),
                     It.IsAny<string>()),
                 Times.Exactly(2));
-        
+
         _fixture.Mocker.GetMock<INotify>()
             .Verify(x => x.NewNotification(
                     It.Is<string>(e => e.Equals("Erro")),
@@ -151,7 +151,7 @@ public class Test : IClassFixture<Fixture>
     {
         //Arrange
         var loginDto = Factory.LoginDto("aline@gmail.com", "123qw");
-        
+
         //Act
         _appService.Login(loginDto);
 
@@ -168,12 +168,12 @@ public class Test : IClassFixture<Fixture>
 
         _fixture.Mocker.GetMock<IMediator>()
             .Verify(x => x.Send(
-                    It.Is<LoginCommand>(cmd => cmd.Email.Equals(loginDto.Email) && 
+                    It.Is<LoginCommand>(cmd => cmd.Email.Equals(loginDto.Email) &&
                                                cmd.Password.Equals(loginDto.Password)),
                     It.IsAny<CancellationToken>()),
                 Times.Once);
     }
-    
+
     [Theory(DisplayName = "Login - Dados invalidos - Falha")]
     [InlineData("aline")]
     [InlineData("aline@")]
@@ -182,10 +182,10 @@ public class Test : IClassFixture<Fixture>
     {
         //Arrange
         var loginDto = Factory.LoginDto(email: email, "");
-        
+
         //Setup
         _fixture.SetupHasNotifications();
-        
+
         //Act
         _appService.Login(loginDto);
 
@@ -204,5 +204,25 @@ public class Test : IClassFixture<Fixture>
             .Verify(x => x.Send(
                     It.IsAny<LoginCommand>(), It.IsAny<CancellationToken>()),
                 Times.Never);
+    }
+
+    [Fact(DisplayName = "InserirUltimoLogin - Sucesso")]
+    public void InserirUltimoLogin_Sucesso()
+    {
+        //Arrange
+        var dto = Factory.UltimoLoginDto();
+
+        //Setup
+        _fixture.SetupHasNotifications();
+
+        //Act
+        _appService.InserirUltimoLogin(Guid.NewGuid(), dto);
+
+        //Assert
+        _fixture.Mocker.GetMock<IMediator>()
+            .Verify(x => x.Send(
+                    It.Is<InserirUltimoLoginCommand>(cmd => cmd.DataDoUltimoLogin == dto.DataDoUltimoLogin),
+                    It.IsAny<CancellationToken>()),
+                Times.Once);
     }
 }

@@ -22,6 +22,13 @@ public partial class AuthorizationAppService
         return _mapper.Map<TokenViewModel>(token);
     }
 
+    public void InserirUltimoLogin(Guid usuarioId, InserirUltimoLoginDto dto)
+    {
+        var command = _mapper.Map<InserirUltimoLoginCommand>(dto, opt => opt.Items.Add("UsuarioId", usuarioId));
+
+        _mediator.Send(command);
+    }
+    
     private void ValidarLogin(LoginDto dto)
     {
         var validador = new LoginDtoValidator();
