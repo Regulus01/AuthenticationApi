@@ -14,9 +14,17 @@ internal static class Factory
         };
     }
 
+    public static LoginDto LoginDto(string email = "jose@gmail.com", string password = "123qwe")
+    {
+        return new LoginDto
+        {
+            Email = email,
+            Password = password
+        }; 
+    }
+
     public static Usuario UsuarioDomain(Guid? id = null, string email = "jose@gmail.com", string senha = "123qwe")
     {
         return new Usuario(id ?? Guid.NewGuid(), email, senha);
     }
-
 }

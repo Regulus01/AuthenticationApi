@@ -17,7 +17,7 @@ public partial class AuthorizationAppService
         
         var loginCommand = _mapper.Map<LoginCommand>(dto);
 
-        var token = _mediator.Send(loginCommand);
+        var token = _mediator.Send(loginCommand).Result;
 
         return _mapper.Map<TokenViewModel>(token);
     }
