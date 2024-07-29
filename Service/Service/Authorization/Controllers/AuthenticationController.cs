@@ -41,24 +41,6 @@ public class AuthenticationController : CoreController
     }
 
     /// <summary>
-    /// Insere uma data para ser o ultimo login do usuário
-    /// </summary>
-    /// <param name="usuarioId">Id do usuário</param>
-    /// <param name="dto"></param>
-    /// <response code="200">Editado com sucesso</response>
-    /// <response code="400">Erro na requisição</response>
-    [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ReponseModel), StatusCodes.Status400BadRequest)]
-    [HttpPatch]
-    [Route("{usuarioId:guid}/UltimoLogin")]
-    [AllowAnonymous]
-    public IActionResult InserirDataDoLogin([Required][FromRoute] Guid usuarioId, InserirUltimoLoginDto dto)
-    {
-        _appService.InserirUltimoLogin(usuarioId, dto);
-        return Response();
-    }
-
-    /// <summary>
     /// Cadastra um usuário no sistema
     /// </summary>
     /// <param name="dto">Dados necessários para o cadastro no sistema</param>

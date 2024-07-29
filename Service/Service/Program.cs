@@ -2,7 +2,10 @@ using Infra.CrossCutting.Util.Configuration.Core.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+AppSettingsConfiguration.AddConfiguration();
+
 builder.Services.RegisterServices();
+builder.Services.AddQueue();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

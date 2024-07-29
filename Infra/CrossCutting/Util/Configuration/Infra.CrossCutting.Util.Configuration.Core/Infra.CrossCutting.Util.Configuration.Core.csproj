@@ -16,10 +16,12 @@
         <ProjectReference Include="..\..\..\..\Data\Infra.Data\Infra.Data.csproj"/>
         <ProjectReference Include="..\..\HttpAcessor\HttpAcessor\HttpAcessor.csproj"/>
         <ProjectReference Include="..\..\Notifications\Infra.CrossCutting.Util.Notifications\Infra.CrossCutting.Util.Notifications.csproj"/>
+        <ProjectReference Include="..\..\PublisherBus\PublisherBus.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1"/>
+        <PackageReference Include="MassTransit" Version="8.2.4-develop.1878" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1"/>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>

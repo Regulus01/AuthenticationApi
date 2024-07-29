@@ -19,9 +19,9 @@ namespace Infra.CrossCutting.Util.Configuration.Core.DependencyInjection;
 
 public static class CompoundServices
 {
-    public static void RegisterServices(this IServiceCollection serviceProvider)
+    public static void RegisterServices(this IServiceCollection services)
     {
-        RepositoryDependence(serviceProvider);
+        RepositoryDependence(services);
     }
 
     private static void RepositoryDependence(IServiceCollection serviceProvider)
@@ -35,7 +35,7 @@ public static class CompoundServices
         IoCRegister(serviceProvider);
 
         MediatorRegister(serviceProvider);
-        
+
         SwaggerRegister(serviceProvider);
     }
 
@@ -44,11 +44,11 @@ public static class CompoundServices
         serviceProvider.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlaceAPI", Version = "v1" });
-    
+
             var xmlFile = $"{Assembly.Load("Service").GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             c.IncludeXmlComments(xmlPath);
-    
+
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
                 Name = "Authorization",
@@ -69,9 +69,9 @@ public static class CompoundServices
                             Id = "Bearer"
                         }
                     },
-                    new string[] {}
+                    new string[] { }
                 }
-            }); 
+            });
         });
     }
 
