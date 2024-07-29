@@ -55,7 +55,7 @@ public class UsuarioRepository : IUsuarioRepository
         
         catch (IOException exception)
         {
-            _logger.LogError("{Message}: {Exception}", ResourceErrorMessage.FALHA_NO_COMMIT, exception);
+            _logger.LogCritical("{Message}: {Exception}", ResourceErrorMessage.FALHA_NO_COMMIT, exception);
             return false;
         }
     }

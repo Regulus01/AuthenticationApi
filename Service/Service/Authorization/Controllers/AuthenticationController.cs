@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Application.Authorization.Dto;
 using Application.Authorization.Interface;
 using Infra.CrossCutting.Util.Configuration.Core.Controllers;
@@ -33,9 +32,9 @@ public class AuthenticationController : CoreController
     [HttpPost]
     [Route("Login")]
     [AllowAnonymous]
-    public IActionResult ObterTokenDeAutenticacao(LoginDto login)
+    public async Task<IActionResult> ObterTokenDeAutenticacao(LoginDto login)
     {
-        var response = _appService.Login(login);
+        var response = await _appService.Login(login);
 
         return Response(response);
     }

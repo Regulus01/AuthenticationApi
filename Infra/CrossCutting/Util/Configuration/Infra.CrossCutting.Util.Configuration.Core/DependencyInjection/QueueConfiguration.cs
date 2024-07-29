@@ -1,3 +1,4 @@
+using Application.QueueConsumes;
 using Infra.CrossCutting.Util.Configuration.Core.DependencyInjection.Bind;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,7 @@ public static class QueueConfiguration
 
         services.AddMassTransit(busConfigurator =>
         {
-            //Cadastrar os consumers
+            AddConsumer(busConfigurator);
             AddRabbitMq(busConfigurator);
         });
     }
@@ -31,13 +32,16 @@ public static class QueueConfiguration
     {
         services.AddTransient<IPublishBus, PublishBus>();
     }
+    
+    private static void AddConsumer(IBusRegistrationConfigurator busConfigurator)
+    {
+        busConfigurator.AddConsumer<InserirUltimoLoginEventConsumer>();
+    }
 
     private static void AddRabbitMq(IBusRegistrationConfigurator busConfigurator)
     {
         busConfigurator.UsingRabbitMq((ctx, cfg) =>
         {
-            // configurar as informacoes de com configuraro masstransient no rabbitmq
-            // essas configuracoes devem ser colocadas no appsettings
             cfg.Host(new Uri(QueueSettings.HostName), host =>
             {
                 host.Username(QueueSettings.User);

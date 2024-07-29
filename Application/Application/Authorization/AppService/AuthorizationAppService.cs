@@ -4,6 +4,7 @@ using Domain.Authentication.Interface;
 using FluentValidation.Results;
 using Infra.CrossCutting.Util.Notifications.Interface;
 using MediatR;
+using PublisherBus.Bus;
 
 namespace Application.Authorization.AppService;
 
@@ -14,7 +15,7 @@ public partial class AuthorizationAppService : IAuthorizationAppService
     private readonly IMapper _mapper;
     private readonly IUsuarioRepository _repository;
 
-    public AuthorizationAppService(INotify notify, IMediator mediator, IMapper mapper, IUsuarioRepository repository)
+    public AuthorizationAppService(INotify notify, IMediator mediator, IMapper mapper, IUsuarioRepository repository, IPublishBus bus)
     {
         _mediator = mediator;
         _mapper = mapper;

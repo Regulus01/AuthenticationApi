@@ -147,4 +147,10 @@
   <data name="DATA_OBRIGATORIA" xml:space="preserve">
     <value>A data é obrigatória</value>
   </data>
+  <data name="USUARIO_VAZIO" xml:space="preserve">
+    <value>Id do usuário não pode ser vazio</value>
+  </data>
+  <data name="DATA_MINIMA" xml:space="preserve">
+    <value>A data não deverá ser o menor valor</value>
+  </data>
 </root>

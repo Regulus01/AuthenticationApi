@@ -10,14 +10,7 @@ public interface IAuthorizationAppService
     /// </summary>
     /// <param name="dto">Dados necessários para o login</param>
     /// <returns>Token de autenticação do usuário</returns>
-    TokenViewModel Login(LoginDto dto);
-
-    /// <summary>
-    /// Insere uma data para ser utilizada como ultimo login do usuário
-    /// </summary>
-    /// <param name="usuarioId">Id do usuário</param>
-    /// <param name="dto">Dados a serem registrados ao realizar o login</param>
-    void InserirUltimoLogin(Guid usuarioId, InserirUltimoLoginDto dto);
+    Task<TokenViewModel> Login(LoginDto dto);
     
     /// <summary>
     /// Cadastra um usuário no sistema

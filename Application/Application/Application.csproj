@@ -11,11 +11,13 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
       <ProjectReference Include="..\..\Infra\CrossCutting\Util\Notifications\Infra.CrossCutting.Util.Notifications\Infra.CrossCutting.Util.Notifications.csproj" />
+      <ProjectReference Include="..\..\Infra\CrossCutting\Util\PublisherBus\PublisherBus.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.1" />
       <PackageReference Include="FluentValidation" Version="11.9.2" />
+      <PackageReference Include="MassTransit.Abstractions" Version="8.2.4-develop.1878" />
     </ItemGroup>
 
 </Project>

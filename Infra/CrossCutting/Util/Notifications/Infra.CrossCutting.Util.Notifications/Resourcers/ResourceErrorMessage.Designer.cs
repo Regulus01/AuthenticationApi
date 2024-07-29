@@ -60,6 +60,15 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A data não deverá ser o menor valor.
+        /// </summary>
+        public static string DATA_MINIMA {
+            get {
+                return ResourceManager.GetString("DATA_MINIMA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A data é obrigatória.
         /// </summary>
         public static string DATA_OBRIGATORIA {
@@ -146,6 +155,15 @@ namespace Infra.CrossCutting.Util.Notifications.Resourcers {
         public static string USUARIO_NAO_ENCONTRADO {
             get {
                 return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id do usuário não pode ser vazio.
+        /// </summary>
+        public static string USUARIO_VAZIO {
+            get {
+                return ResourceManager.GetString("USUARIO_VAZIO", resourceCulture);
             }
         }
     }

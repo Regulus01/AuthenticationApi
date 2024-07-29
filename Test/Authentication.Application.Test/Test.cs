@@ -205,24 +205,4 @@ public class Test : IClassFixture<Fixture>
                     It.IsAny<LoginCommand>(), It.IsAny<CancellationToken>()),
                 Times.Never);
     }
-
-    [Fact(DisplayName = "InserirUltimoLogin - Sucesso")]
-    public void InserirUltimoLogin_Sucesso()
-    {
-        //Arrange
-        var dto = Factory.UltimoLoginDto();
-
-        //Setup
-        _fixture.SetupHasNotifications();
-
-        //Act
-        _appService.InserirUltimoLogin(Guid.NewGuid(), dto);
-
-        //Assert
-        _fixture.Mocker.GetMock<IMediator>()
-            .Verify(x => x.Send(
-                    It.Is<InserirUltimoLoginCommand>(cmd => cmd.DataDoUltimoLogin == dto.DataDoUltimoLogin),
-                    It.IsAny<CancellationToken>()),
-                Times.Once);
-    }
 }
