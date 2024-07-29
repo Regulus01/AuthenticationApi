@@ -8,3 +8,13 @@ services:
       POSTGRES_PASSWORD: example
     ports:
       - "5432:5432"
+      
+  rabbitMQ:
+    image: rabbitmq:3.12-management
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: 123qwe
+    ports:
+      - "5672:5672"
+      - "15672:15672"

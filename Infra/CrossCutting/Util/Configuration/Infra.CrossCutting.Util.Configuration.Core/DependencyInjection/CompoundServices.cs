@@ -17,9 +17,9 @@ using Npgsql;
 
 namespace Infra.CrossCutting.Util.Configuration.Core.DependencyInjection;
 
-public class CompoundServices
+public static class CompoundServices
 {
-    public static void RegisterServices(IServiceCollection serviceProvider)
+    public static void RegisterServices(this IServiceCollection serviceProvider)
     {
         RepositoryDependence(serviceProvider);
     }
